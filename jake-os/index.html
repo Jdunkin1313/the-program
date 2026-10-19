@@ -24,7 +24,7 @@ button,input,select{font:inherit} button{-webkit-tap-highlight-color:transparent
 .hero-footer{display:flex;align-items:flex-end;justify-content:space-between;margin-top:23px} .hero-metric span{display:block;font-size:10px;color:#728097;text-transform:uppercase;font-weight:800;letter-spacing:.1em} .hero-metric strong{font-size:21px;letter-spacing:-.03em} .cta{border:0;border-radius:17px;background:linear-gradient(135deg,#3989ff,#5edbff);color:#03101b;padding:12px 15px;font-weight:900;font-size:13px;box-shadow:0 10px 28px rgba(71,164,255,.25)}
 .section-title{display:flex;align-items:end;justify-content:space-between;margin:25px 3px 11px} .section-title h3{margin:0;font-size:17px;letter-spacing:-.025em} .section-title button{border:0;background:none;color:#6faeff;font-size:12px;font-weight:750;padding:0}
 .card{background:linear-gradient(180deg,rgba(18,23,33,.96),rgba(13,17,25,.96));border:1px solid var(--line);border-radius:23px;box-shadow:0 12px 35px rgba(0,0,0,.12)}
-.plan{padding:4px 16px} .plan-row{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)} .plan-row:last-child{border-bottom:0} .plan-time{font-size:11px;color:#657188;font-weight:800} .plan-row b{font-size:14px;letter-spacing:-.01em} .plan-row small{display:block;color:#7f899a;margin-top:3px;font-size:11px} .dot{width:8px;height:8px;border-radius:50%;background:#4f9fff;box-shadow:0 0 0 4px rgba(79,159,255,.08)} .check{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.13);background:#0b0e14;color:#8290a6;display:grid;place-items:center} .check.done{background:#193e31;color:#63e6b5;border-color:rgba(99,230,181,.25)}
+.plan{padding:4px 16px}.plan-row{display:grid;grid-template-columns:72px minmax(0,1fr) 34px;gap:12px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent}.plan-row:active{opacity:.78}.plan-row:last-child{border-bottom:0}.plan-time{font-size:10px;color:#657188;font-weight:850;line-height:1.25;text-transform:uppercase;letter-spacing:.06em;word-break:normal;overflow-wrap:break-word}.plan-row>div:nth-child(2){min-width:0}.plan-row b{font-size:14px;letter-spacing:-.01em;display:block;line-height:1.25}.plan-row small{display:block;color:#7f899a;margin-top:4px;font-size:11px;line-height:1.35}.dot{width:8px;height:8px;border-radius:50%;background:#4f9fff;box-shadow:0 0 0 4px rgba(79,159,255,.08);justify-self:end}.check{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.13);background:#0b0e14;color:#8290a6;display:grid;place-items:center;justify-self:end}.check.done{background:#193e31;color:#63e6b5;border-color:rgba(99,230,181,.25)}
 .nutrition-strip{display:grid;grid-template-columns:1fr 1fr 1.18fr;gap:1px;background:var(--line);overflow:hidden} .nut-cell{padding:16px 13px;background:#0f141d} .nut-cell span{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#67738a;font-weight:850} .nut-cell strong{display:block;margin-top:5px;font-size:18px;letter-spacing:-.035em} .nut-cell:last-child strong{font-size:13px;line-height:1.2;margin-top:7px;color:#b8c8df}
 .reset-preview{padding:17px;display:flex;align-items:center;gap:14px;cursor:pointer} .reset-icon{width:44px;height:44px;border-radius:16px;background:linear-gradient(145deg,#10253a,#0f1722);display:grid;place-items:center;color:#65c8ff;border:1px solid rgba(93,196,255,.15)} .reset-preview b{font-size:14px} .reset-preview small{display:block;margin-top:4px;color:#778297;font-size:11px} .chev{margin-left:auto;color:#5c6779;font-size:22px}
 .week-grid{display:grid;gap:9px;margin-top:16px} .day-card{padding:14px 15px;display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s ease,border-color .12s ease,background .12s ease}.day-card:active{transform:scale(.985);border-color:rgba(85,166,255,.38)} .day-card.today{border-color:rgba(85,166,255,.4);background:linear-gradient(180deg,#121a27,#0f141e)} .dow{font-size:11px;color:#657188;text-transform:uppercase;font-weight:900;letter-spacing:.08em} .dateball{font-size:20px;font-weight:900;margin-top:2px} .day-card b{font-size:13px} .day-card small{display:block;color:#737f94;font-size:11px;margin-top:3px} .day-tag{border-radius:999px;padding:6px 9px;font-size:9px;font-weight:900;background:#0b0f16;border:1px solid var(--line);color:#7f8aa0}
@@ -67,6 +67,7 @@ button,input,select{font:inherit} button{-webkit-tap-highlight-color:transparent
   <button class="nav-btn" data-view="progress" onclick="showView('progress',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/></svg><span>Progress</span></button>
 </div></nav>
 
+<div class="overlay" id="ptOverlay"><div class="overlay-card"><button class="close" onclick="closePT()">×</button><div id="ptContent"></div></div></div>
 <div class="overlay" id="resetOverlay"><div class="overlay-head"><button class="back" onclick="closeReset()">‹</button><span class="eyebrow">Weekly recovery</span><span style="width:38px"></span></div><div id="resetContent"></div></div>
 <div class="modal-wrap" id="modal"><div class="sheet" id="sheet"></div></div>
 
@@ -139,14 +140,47 @@ function toggleDone(date,title){const k=completedKey(date,title);state.completed
 function dayCompletion(date){const core=scheduleFor(date).filter(x=>x.type!=='run');if(!core.length)return 0;return Math.round(100*core.filter(x=>state.completed[completedKey(date,x.title)]).length/core.length)}
 function latestFor(exercise){return state.lifting.filter(x=>x.exercise===exercise).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
 function exerciseTarget(ex,rx){let l=latestFor(ex);if(!l)return'Build a clean baseline.';let m=rx.match(/(\d+)\s*x\s*(\d+)-(\d+)/), reps=(l.setReps||[]).map(Number);if(!m||!reps.length)return'Beat the last clean performance.';let sets=+m[1],lo=+m[2],hi=+m[3];if(reps.length>=sets&&reps.slice(0,sets).every(v=>v>=hi)){let w=parseFloat(l.weight)||0;return w?`Ready to add load from ${w} lb.`:'Add reps or difficulty.'}return`Beat ${l.weight} lb · ${reps.join('/')} by 1–2 clean reps.`}
+
+function openPT(date,title){
+ const lower=title.toLowerCase();
+ let items=lower.includes('run durability')?[
+  'Tibialis raises · 2 × 15–20',
+  'Slow calf raises · 2 × 12–15',
+  'Ankle mobility rocks · 2 × 10/side',
+  'Calf stretch · 2 × 30 sec/side'
+ ]:lower.includes('back + core')?[
+  'Cat-cow · 8–10 reps',
+  'Bird dog · 2 × 8/side',
+  'Dead bug · 2 × 8/side',
+  'Hip flexor stretch · 2 × 30 sec/side'
+ ]:[
+  'Easy calf raises · 2 × 12',
+  'Ankle mobility · 2 × 10/side',
+  'Hip mobility · 1–2 min/side',
+  'Calf + hamstring stretch · 2 × 30 sec/side'
+ ];
+ let done=!!state.completed[completedKey(date,title)];
+ $('#ptContent').innerHTML=`<div class="eyebrow">${fmtDate(date)}</div><h2>${title}</h2><div class="subhead">Keep it controlled and pain-free. Stop anything that materially worsens symptoms.</div><div class="card reset-list">${items.map((x,i)=>`<div class="reset-item"><input type="checkbox" id="pt_${i}"><label for="pt_${i}">${x}</label></div>`).join('')}</div><button class="soft-btn ${done?'saved':''}" onclick="toggleDone('${date}','${title.replace(/'/g,"\\'")}');this.textContent='Completed ✓';this.classList.add('saved')">${done?'Completed ✓':'Mark PT complete'}</button>`;
+ $('#ptOverlay').classList.add('show');
+}
+function closePT(){$('#ptOverlay').classList.remove('show')}
 function renderToday(){
  const d=todayISO(), items=scheduleFor(d), nut=nutTarget(d), r=rotation(d), comp=dayCompletion(d), first=items.find(x=>x.type==='lift')||items[0];
- let plan=items.length?items.map((x,i)=>{let done=!!state.completed[completedKey(d,x.title)];let click=x.type==='lift'?`onclick="openWorkout('${x.title.replace(/'/g,"\'")}')"`:x.type==='reset'?`onclick="openReset()"`:`onclick="toggleDone('${d}','${x.title.replace(/'/g,"\'")}')"`;return `<div class="plan-row"><div class="plan-time">${x.type==='run'?'RUN':x.type==='lift'?'LIFT':x.type==='reset'?'RESET':x.detail||'TASK'}</div><div ${click} style="cursor:pointer"><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${d}','${x.title.replace(/'/g,"\'")}')">${done?'✓':''}</button>`}</div>`}).join(''):'<div class="empty">Nothing scheduled. Keep the day light.</div>';
+ const esc=t=>t.replace(/'/g,"\\'");
+ let plan=items.length?items.map(x=>{
+   let done=!!state.completed[completedKey(d,x.title)], label=itemLabel(x.type), action='';
+   if(x.type==='lift') action=`openWorkout('${esc(x.title)}')`;
+   else if(x.type==='reset') action=`openReset('${d}')`;
+   else if(x.type==='checkin') action=`showView('progress',document.querySelector('[data-view=progress]'))`;
+   else if(x.type==='recovery') action=`openPT('${d}','${esc(x.title)}')`;
+   else if(['youtube','side','task'].includes(x.type)) action=`toggleDone('${d}','${esc(x.title)}')`;
+   return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${label}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${d}','${esc(x.title)}')">${done?'✓':''}</button>`}</div>`;
+ }).join(''):'<div class="empty">Nothing scheduled. Keep the day light.</div>';
  $('#todayView').innerHTML=`<div class="eyebrow">${fmtDate(d)} · ${r} week</div><h1>Today</h1><div class="subhead">Only what matters today.</div>
- <div class="hero"><div class="hero-top"><div><div class="eyebrow">NEXT UP</div><h2>${first?first.title:'Recovery day'}</h2><p>${first?first.detail:'Protect recovery and get ready for the week.'}</p></div><div class="status-pill">${d<TRANSITION_DATE?'CURRENT WEEK':'4 + 4 PHASE'}</div></div><div class="hero-footer"><div class="hero-metric"><span>Day complete</span><strong>${comp}%</strong></div>${first?.type==='lift'?`<button class="cta" onclick="openWorkout('${first.title}')">Start workout</button>`:''}</div></div>
+ <div class="hero"><div class="hero-top"><div><div class="eyebrow">NEXT UP</div><h2>${first?first.title:'Recovery day'}</h2><p>${first?first.detail:'Protect recovery and get ready for the week.'}</p></div><div class="status-pill">${d<TRANSITION_DATE?'CURRENT WEEK':'4 + 4 PHASE'}</div></div><div class="hero-footer"><div class="hero-metric"><span>Day complete</span><strong>${comp}%</strong></div>${first?.type==='lift'?`<button class="cta" onclick="openWorkout('${esc(first.title)}')">Start workout</button>`:''}</div></div>
  <div class="section-title"><h3>Day plan</h3><button onclick="openAdd()">+ Add</button></div><div class="card plan">${plan}</div>
  <div class="section-title"><h3>Nutrition</h3><button onclick="showView('nutrition',document.querySelector('[data-view=nutrition]'))">Open</button></div><div class="card nutrition-strip"><div class="nut-cell"><span>Calories</span><strong>${nut.cal.toLocaleString()}</strong></div><div class="nut-cell"><span>Protein</span><strong>${nut.protein}g</strong></div><div class="nut-cell"><span>Today</span><strong>${nut.focus}</strong></div></div>
- ${parseLocal(d).getDay()===0?`<div class="section-title"><h3>Sunday</h3></div><div class="card reset-preview" onclick="openReset()"><div class="reset-icon">↻</div><div><b>Weekly Reset</b><small>Fresh checklist every Sunday · history stays saved</small></div><div class="chev">›</div></div>`:''}
+ ${parseLocal(d).getDay()===0?`<div class="section-title"><h3>Sunday</h3></div><div class="card reset-preview" onclick="openReset('${d}')"><div class="reset-icon">↻</div><div><b>Weekly Reset</b><small>Fresh checklist every Sunday · history stays saved</small></div><div class="chev">›</div></div>`:''}
  `;
 }
 function renderWeek(){
@@ -194,13 +228,13 @@ function itemLabel(type){
  return {lift:'LIFT',run:'RUN',reset:'RESET',recovery:'PT',checkin:'CHECK-IN',youtube:'YT',side:'BUILD',task:'TASK'}[type]||'PLAN';
 }
 function dayItemHTML(date,x){
- let done=!!state.completed[completedKey(date,x.title)];
- let action='';
- if(x.type==='lift') action=`openWorkout('${x.title.replace(/'/g,"\\'")}');closeModal()`;
+ let done=!!state.completed[completedKey(date,x.title)], esc=x.title.replace(/'/g,"\\'"), action='';
+ if(x.type==='lift') action=`openWorkout('${esc}');closeModal()`;
  else if(x.type==='reset') action=`closeModal();openReset('${date}')`;
  else if(x.type==='checkin') action=`closeModal();showView('progress',document.querySelector('[data-view=progress]'))`;
- else if(x.type!=='run') action=`toggleDone('${date}','${x.title.replace(/'/g,"\\'")}');openDay('${date}')`;
- return `<div class="plan-row"><div class="plan-time">${itemLabel(x.type)}</div><div ${action?`onclick="${action}" style="cursor:pointer"`:''}><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${date}','${x.title.replace(/'/g,"\\'")}');openDay('${date}')">${done?'✓':''}</button>`}</div>`;
+ else if(x.type==='recovery') action=`closeModal();openPT('${date}','${esc}')`;
+ else if(['youtube','side','task'].includes(x.type)) action=`toggleDone('${date}','${esc}');openDay('${date}')`;
+ return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${itemLabel(x.type)}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${date}','${esc}');openDay('${date}')">${done?'✓':''}</button>`}</div>`;
 }
 function openDay(date){
  const items=scheduleFor(date), n=nutTarget(date);
@@ -221,7 +255,7 @@ function openInfo(title,items){$('#sheet').innerHTML=`<div class="grab"></div><h
 function openDataSheet(){$('#sheet').innerHTML=`<div class="grab"></div><h3>Jake OS</h3><div class="subhead" style="margin-bottom:14px">Health-first. Runna handles running. Your lift history stays local on this device.</div><button class="soft-btn" onclick="exportBackup()">Export app backup</button><button class="soft-btn" onclick="closeModal()">Close</button>`;$('#modal').classList.add('show')}
 function exportBackup(){let blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),program:SEED.program,lifting:state.lifting,state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jake-os-backup-'+todayISO()+'.json';a.click();URL.revokeObjectURL(a.href)}
 function showView(v,btn){$$('.view').forEach(x=>x.classList.remove('active'));$('#'+v+'View').classList.add('active');$$('.nav-btn').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(v==='today')renderToday();if(v==='week')renderWeek();if(v==='train')renderTrain();if(v==='nutrition')renderNutrition();if(v==='progress')renderProgress();window.scrollTo(0,0)}
-$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});$('#ptOverlay').addEventListener('click',e=>{if(e.target.id==='ptOverlay')closePT()});
 renderToday();renderWeek();renderTrain();renderNutrition();renderProgress();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
 </script>
