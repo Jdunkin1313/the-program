@@ -9,6 +9,6 @@
   "theme_color":"#080a0f",
   "orientation":"portrait-primary",
   "icons":[
-    {"src":"./icon-v2.png?v=2","sizes":"180x180","type":"image/png","purpose":"any"}
+    {"src":"./icon-final.png?v=3","sizes":"180x180","type":"image/png","purpose":"any"}
   ]
 }
