@@ -139,7 +139,7 @@ function nutTarget(date){
 }
 function completedKey(date,title){return date+'|'+title}
 function toggleDone(date,title){const k=completedKey(date,title);state.completed[k]=!state.completed[k];save();renderToday();renderWeek()}
-function dayCompletion(date){const core=scheduleFor(date).filter(x=>x.type!=='run');if(!core.length)return 0;return Math.round(100*core.filter(x=>state.completed[completedKey(date,x.title)]).length/core.length)}
+function dayCompletion(date){const core=scheduleFor(date);if(!core.length)return 0;return Math.round(100*core.filter(x=>state.completed[completedKey(date,x.title)]).length/core.length)}
 function latestFor(exercise){return state.lifting.filter(x=>x.exercise===exercise).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
 function exerciseTarget(ex,rx){let l=latestFor(ex);if(!l)return'Build a clean baseline.';let m=rx.match(/(\d+)\s*x\s*(\d+)-(\d+)/), reps=(l.setReps||[]).map(Number);if(!m||!reps.length)return'Beat the last clean performance.';let sets=+m[1],lo=+m[2],hi=+m[3];if(reps.length>=sets&&reps.slice(0,sets).every(v=>v>=hi)){let w=parseFloat(l.weight)||0;return w?`Ready to add load from ${w} lb.`:'Add reps or difficulty.'}return`Beat ${l.weight} lb · ${reps.join('/')} by 1–2 clean reps.`}
 
@@ -167,7 +167,7 @@ function openPT(date,title){
 }
 function closePT(){$('#ptOverlay').classList.remove('show')}
 function renderToday(){
- const d=todayISO(), items=scheduleFor(d), nut=nutTarget(d), r=rotation(d), comp=dayCompletion(d), first=items.find(x=>x.type==='run'||!state.completed[completedKey(d,x.title)])||null;
+ const d=todayISO(), items=scheduleFor(d), nut=nutTarget(d), r=rotation(d), comp=dayCompletion(d), first=items.find(x=>!state.completed[completedKey(d,x.title)])||null;
  const esc=t=>t.replace(/'/g,"\\'");
  let plan=items.length?items.map(x=>{
    let done=!!state.completed[completedKey(d,x.title)], label=itemLabel(x.type), action='';
@@ -175,8 +175,8 @@ function renderToday(){
    else if(x.type==='reset') action=`openReset('${d}')`;
    else if(x.type==='checkin') action=`showView('progress',document.querySelector('[data-view=progress]'))`;
    else if(x.type==='recovery') action=`openPT('${d}','${esc(x.title)}')`;
-   else if(['youtube','side','task'].includes(x.type)) action=`toggleDone('${d}','${esc(x.title)}')`;
-   return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${label}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${d}','${esc(x.title)}')">${done?'✓':''}</button>`}</div>`;
+   else if(['run','youtube','side','task'].includes(x.type)) action=`toggleDone('${d}','${esc(x.title)}')`;
+   return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${label}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div><button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${d}','${esc(x.title)}')">${done?'✓':''}</button></div>`;
  }).join(''):'<div class="empty">Nothing scheduled. Keep the day light.</div>';
  $('#todayView').innerHTML=`<div class="eyebrow">${fmtDate(d)} · ${r} week</div><h1>Today</h1><div class="subhead">Only what matters today.</div>
  <div class="hero"><div class="hero-top"><div><div class="eyebrow">NEXT UP</div><h2>${first?first.title:'Day complete'}</h2><p>${first?first.detail:'Everything you needed to handle today is checked off.'}</p></div><div class="status-pill">${d<TRANSITION_DATE?'CURRENT WEEK':'4 + 4 PHASE'}</div></div><div class="countdown-strip"><span>Dallas Marathon</span><strong>${marathonDaysLeft(d)} days</strong></div><div class="hero-footer"><div class="hero-metric"><span>Day complete</span><strong>${comp}%</strong></div></div></div>
@@ -242,8 +242,8 @@ function dayItemHTML(date,x){
  else if(x.type==='reset') action=`closeModal();openReset('${date}')`;
  else if(x.type==='checkin') action=`closeModal();showView('progress',document.querySelector('[data-view=progress]'))`;
  else if(x.type==='recovery') action=`closeModal();openPT('${date}','${esc}')`;
- else if(['youtube','side','task'].includes(x.type)) action=`toggleDone('${date}','${esc}');openDay('${date}')`;
- return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${itemLabel(x.type)}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div>${x.type==='run'?'<span class="dot"></span>':`<button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${date}','${esc}');openDay('${date}')">${done?'✓':''}</button>`}</div>`;
+ else if(['run','youtube','side','task'].includes(x.type)) action=`toggleDone('${date}','${esc}');openDay('${date}')`;
+ return `<div class="plan-row" ${action?`onclick="${action}"`:''}><div class="plan-time">${itemLabel(x.type)}</div><div><b>${x.title}</b><small>${x.detail||''}</small></div><button class="check ${done?'done':''}" onclick="event.stopPropagation();toggleDone('${date}','${esc}');openDay('${date}')">${done?'✓':''}</button></div>`;
 }
 function openDay(date){
  const items=scheduleFor(date), n=nutTarget(date);
